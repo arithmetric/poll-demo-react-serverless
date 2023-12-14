@@ -1,0 +1,51 @@
+{
+  "name": "poll-demo-react-serverless-webapp",
+  "version": "1.0.0",
+  "description": "React web app for the Poll Demo.",
+  "author": "Joe Turgeon <arithmetric@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@mui/icons-material": "^5.14.18",
+    "@mui/joy": "^5.0.0-beta.15",
+    "@mui/material": "^5.14.18",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.63",
+    "@types/react": "^18.2.38",
+    "@types/react-dom": "^18.2.16",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.9.1",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.19.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
+    "build": "react-scripts build",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint-fix": "eslint . --ext .ts,.tsx --fix"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^8.54.0"
+  }
+}

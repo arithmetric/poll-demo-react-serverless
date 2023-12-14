@@ -1,0 +1,4 @@
+:has(>.Mui-checked) {
+  background-color: var(--joy-palette-background-surface, var(--joy-palette-neutral-50, #F4F5F7));
+}
+  
