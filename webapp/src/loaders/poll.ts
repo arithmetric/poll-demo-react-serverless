@@ -1,8 +1,8 @@
-import { Poll } from "../types";
+import { PollData } from "../../../types";
 import { PollService } from "../services/poll";
 
 export interface LoaderData {
-  poll?: Poll;
+  poll?: PollData;
 }
 
 export async function loader({ params }: { params: { [key: string]: string | undefined }}) {

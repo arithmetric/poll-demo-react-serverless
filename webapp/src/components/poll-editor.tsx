@@ -14,12 +14,12 @@ import Typography from "@mui/joy/Typography";
 
 import Delete from "@mui/icons-material/Delete";
 
-import { Poll, PollOption } from "../types";
+import { PollData, PollOption } from "../../../types";
 import "./poll.css";
 
 type PollEditorComponentProps = {
-  poll?: Partial<Poll>;
-  onPreviewClick?: (poll: Partial<Poll>) => void;
+  poll?: Partial<PollData>;
+  onPreviewClick?: (poll: Partial<PollData>) => void;
 };
 
 const PollEditorComponent = (props: PollEditorComponentProps) => {
@@ -49,7 +49,7 @@ const PollEditorComponent = (props: PollEditorComponentProps) => {
   };
 
   const preview = () => {
-    const poll: Partial<Poll> = {
+    const poll: Partial<PollData> = {
       Question: question,
       Description: description,
       Options: options,

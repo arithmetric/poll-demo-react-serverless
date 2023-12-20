@@ -2,16 +2,16 @@ import Button from "@mui/joy/Button";
 import FormControl from "@mui/joy/FormControl";
 import React from "react";
 
-import { Poll } from "../types";
+import { PollData } from "../../../types";
 import PollComponent from "../components/poll";
 import PollEditor from "../components/poll-editor";
 import { PollService } from "../services/poll";
 
 export default function Root() {
-  const [poll, setPoll] = React.useState<Partial<Poll>>();
+  const [poll, setPoll] = React.useState<Partial<PollData>>();
   const [isPreview, setPreview] = React.useState<boolean>(false);
 
-  const onPreviewClick = (poll: Partial<Poll>) => {
+  const onPreviewClick = (poll: Partial<PollData>) => {
     setPoll(poll);
     setPreview(true);
   };
@@ -19,7 +19,7 @@ export default function Root() {
   const onSaveClick = () => {
     if (!poll) return;
     PollService.Create(poll)
-      .then((savedPoll: Poll) => {
+      .then((savedPoll: PollData) => {
         window.location.pathname = `/poll/${savedPoll.Id}`;
       });
   };

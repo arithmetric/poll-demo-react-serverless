@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 
 import { DynamodbClient, SqsClient } from "../lib/clients";
-import { PollData, PollVoteMessage } from "../types";
+import { PollData, PollVoteMessage } from "../../types";
 
 // GET /poll/:id
 // Returns a poll specified by its ID

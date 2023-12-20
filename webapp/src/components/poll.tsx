@@ -10,12 +10,12 @@ import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
 
 import { PollService } from "../services/poll";
-import { Poll, PollOption } from "../types";
+import { PollData, PollOption } from "../../../types";
 
 import "./poll.css";
 
 type PollComponentProps = {
-  poll?: Partial<Poll>;
+  poll?: Partial<PollData>;
   isReadOnly?: boolean;
   showResults?: boolean;
   showResultsLink?: boolean;

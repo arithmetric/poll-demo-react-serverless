@@ -1,7 +1,7 @@
 import { AttributeValue, DynamoDBClient, GetItemCommand, PutItemCommand, ReturnValue, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
-import { DataTypes } from "../../types";
+import { DataTypes } from "../../../types";
 
 const tableName = process.env.TABLE_NAME ?? "PlatformStack-PlatformDataDataTable0D8-f2b5b9af";
 const endpoint = process.env.TABLE_NAME ? undefined : "http://localhost:4566";

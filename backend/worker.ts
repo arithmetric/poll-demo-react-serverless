@@ -1,7 +1,7 @@
 import { Message } from '@aws-sdk/client-sqs';
 
 import { DynamodbClient } from './lib/clients';
-import { BaseMessage, PollData, PollVoteMessage } from './types';
+import { BaseMessage, PollData, PollVoteMessage } from '../types';
 
 export class Worker {
   static async ProcessQueueMessage(m: Message): Promise<boolean> {
