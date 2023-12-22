@@ -10,7 +10,7 @@ import {
   PollVoteMessage,
 } from "./messages";
 
-export {
+export type {
   DataTypes,
   BaseData,
   PollData,

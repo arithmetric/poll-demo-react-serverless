@@ -27,10 +27,6 @@ export class WebappConstruct extends Construct {
       enforceSSL: true,
       versioned: true,
     });
-    new BucketDeployment(this, "WebappBucketDeployment", {
-      destinationBucket: bucket,
-      sources: [Source.asset(join(cwd(), "../webapp/build"))],
-    });
 
     // Origin Access Identity to allow CloudFront to read S3
     const originAccessIdentity = new OriginAccessIdentity(this, "WebappOriginAccessIdentity");
@@ -57,6 +53,13 @@ export class WebappConstruct extends Construct {
       defaultRootObject: "index.html",
       certificate: props.SslCertificate,
       domainNames: [`${process.env.WEBAPP_SUBDOMAIN}.${process.env.DOMAIN_NAME}`],
+    });
+
+    // Deploy web app files to S3 bucket and invalidate Cloudfront cache.
+    new BucketDeployment(this, "WebappBucketDeployment", {
+      destinationBucket: bucket,
+      sources: [Source.asset(join(cwd(), "../webapp/dist"))],
+      distribution,
     });
 
     // Route53 A Record

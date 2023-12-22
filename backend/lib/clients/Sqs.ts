@@ -2,7 +2,7 @@ import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
 
 import { BaseMessage } from "../../../types";
 
-const queueUrl = process.env.QUEUE_URL ?? "http://localhost:4566/000000000000/PollQueue";
+const queueUrl = process.env.QUEUE_URL ?? "http://localhost:4566/000000000000/PollQueue-Local";
 const endpoint = process.env.QUEUE_URL ? undefined : "http://localhost:4566";
 
 const client = new SQSClient({

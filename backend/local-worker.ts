@@ -2,7 +2,7 @@ import { DeleteMessageBatchCommand, DeleteMessageBatchRequestEntry, ReceiveMessa
 
 import { Worker } from './worker';
 
-const queueUrl = "http://localhost:4566/000000000000/PollQueue";
+const queueUrl = "http://localhost:4566/000000000000/PollQueue-Local";
 
 // For local environments, poll the Localstack SQS queue for messages.
 const client = new SQSClient({
@@ -10,18 +10,8 @@ const client = new SQSClient({
 });
 
 const receive = async () => {
-  const input = { // ReceiveMessageRequest
+  const input = {
     QueueUrl: queueUrl,
-    // AttributeNames: [ // AttributeNameList
-    //   "All" || "Policy" || "VisibilityTimeout" || "MaximumMessageSize" || "MessageRetentionPeriod" || "ApproximateNumberOfMessages" || "ApproximateNumberOfMessagesNotVisible" || "CreatedTimestamp" || "LastModifiedTimestamp" || "QueueArn" || "ApproximateNumberOfMessagesDelayed" || "DelaySeconds" || "ReceiveMessageWaitTimeSeconds" || "RedrivePolicy" || "FifoQueue" || "ContentBasedDeduplication" || "KmsMasterKeyId" || "KmsDataKeyReusePeriodSeconds" || "DeduplicationScope" || "FifoThroughputLimit" || "RedriveAllowPolicy" || "SqsManagedSseEnabled",
-    // ],
-    // MessageAttributeNames: [ // MessageAttributeNameList
-    //   "STRING_VALUE",
-    // ],
-    // MaxNumberOfMessages: Number("int"),
-    // VisibilityTimeout: Number("int"),
-    // WaitTimeSeconds: Number("int"),
-    // ReceiveRequestAttemptId: "STRING_VALUE",
   };
   const command = new ReceiveMessageCommand(input);
   const response = await client.send(command);
@@ -45,8 +35,7 @@ const receive = async () => {
     };
     if (deleteInput.Entries.length) {
       const deleteCommand = new DeleteMessageBatchCommand(deleteInput);
-      const deleteResponse = await client.send(deleteCommand);
-      console.log('delete response', deleteResponse);
+      await client.send(deleteCommand);
     }
   }
 };

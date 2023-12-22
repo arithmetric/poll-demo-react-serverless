@@ -1,6 +1,6 @@
 import Button from "@mui/joy/Button";
 import FormControl from "@mui/joy/FormControl";
-import React from "react";
+import { useState } from "react";
 
 import { PollData } from "../../../types";
 import PollComponent from "../components/poll";
@@ -8,8 +8,8 @@ import PollEditor from "../components/poll-editor";
 import { PollService } from "../services/poll";
 
 export default function Root() {
-  const [poll, setPoll] = React.useState<Partial<PollData>>();
-  const [isPreview, setPreview] = React.useState<boolean>(false);
+  const [poll, setPoll] = useState<Partial<PollData>>();
+  const [isPreview, setPreview] = useState<boolean>(false);
 
   const onPreviewClick = (poll: Partial<PollData>) => {
     setPoll(poll);

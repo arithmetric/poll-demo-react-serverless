@@ -3,7 +3,7 @@ import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
 import { DataTypes } from "../../../types";
 
-const tableName = process.env.TABLE_NAME ?? "PlatformStack-PlatformDataDataTable0D8-f2b5b9af";
+const tableName = process.env.TABLE_NAME ?? "PollDemo-Local";
 const endpoint = process.env.TABLE_NAME ? undefined : "http://localhost:4566";
 
 const keyField = 'Id';

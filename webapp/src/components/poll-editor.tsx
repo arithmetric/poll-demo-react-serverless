@@ -1,4 +1,3 @@
-import React from "react";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
@@ -11,6 +10,7 @@ import Input from "@mui/joy/Input";
 import Sheet from "@mui/joy/Sheet";
 import Textarea from "@mui/joy/Textarea";
 import Typography from "@mui/joy/Typography";
+import { useState } from "react";
 
 import Delete from "@mui/icons-material/Delete";
 
@@ -23,9 +23,9 @@ type PollEditorComponentProps = {
 };
 
 const PollEditorComponent = (props: PollEditorComponentProps) => {
-  const [question, setQuestion] = React.useState(props?.poll?.Question);
-  const [description, setDescription] = React.useState(props?.poll?.Description);
-  const [options, setOptions] = React.useState<PollOption[]>(props?.poll?.Options || [{ Id: window.crypto.randomUUID() }, { Id: window.crypto.randomUUID() }]);
+  const [question, setQuestion] = useState(props?.poll?.Question);
+  const [description, setDescription] = useState(props?.poll?.Description);
+  const [options, setOptions] = useState<PollOption[]>(props?.poll?.Options || [{ Id: window.crypto.randomUUID() }, { Id: window.crypto.randomUUID() }]);
 
   const setOption = (id: string, option: Partial<PollOption>) => {
     setOptions((options) => {
