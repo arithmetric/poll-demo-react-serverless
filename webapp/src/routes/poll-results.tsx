@@ -2,7 +2,9 @@ import dayjs from "dayjs";
 import calendar from "dayjs/plugin/calendar";
 import Box from "@mui/joy/Box";
 import Chip from "@mui/joy/Chip";
-import { useLoaderData, useRevalidator } from "react-router-dom";
+import Link from "@mui/joy/Link";
+import Typography from "@mui/joy/Typography";
+import { Link as RouterLink, useLoaderData, useRevalidator } from "react-router-dom";
 
 import RefreshIcon from "@mui/icons-material/Refresh";
 
@@ -41,6 +43,7 @@ export default function PollResultsPage() {
               </Chip>
             </Box>
           )}
+          <Typography textColor="primary.500" sx={{ mt: 1 }}><Link to={"/"} component={RouterLink} textColor="inherit">Create a Poll</Link></Typography>
         </>
       )}
     </>

@@ -10,7 +10,7 @@ import Textarea from "@mui/joy/Textarea";
 import Typography from "@mui/joy/Typography";
 import { useState } from "react";
 
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import Delete from "@mui/icons-material/Delete";
 
 import { PollData, PollOption } from "../../../types";
@@ -59,7 +59,7 @@ const PollEditorComponent = (props: PollEditorComponentProps) => {
   return (
     <div className="poll-editor">
       <Sheet>
-        <FormControl sx={{ my: 1 }}>
+        <FormControl sx={{ my: 2 }}>
           <FormLabel>Question *</FormLabel>
           <Input value={question} onChange={(e) => setQuestion(e.target.value)} />
         </FormControl>
@@ -75,6 +75,7 @@ const PollEditorComponent = (props: PollEditorComponentProps) => {
               maxHeight: "max-content",
               maxWidth: "100%",
               mx: "auto",
+              my: 2,
               overflow: "auto",
               resize: "horizontal",
             }}
@@ -105,10 +106,10 @@ const PollEditorComponent = (props: PollEditorComponentProps) => {
             </CardContent>
           </Card>          
         ))}
-        <FormControl sx={{ my: 1 }}>
+        <FormControl sx={{ my: 2 }}>
           <Button onClick={addOption} variant="soft" startDecorator={<AddIcon />}>Add Option</Button>
         </FormControl>
-        <FormControl sx={{ my: 1 }}>
+        <FormControl sx={{ my: 2 }}>
           <Button onClick={preview}>Preview</Button>
         </FormControl>
       </Sheet>

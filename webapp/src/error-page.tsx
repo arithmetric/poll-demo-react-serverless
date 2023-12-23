@@ -17,7 +17,7 @@ export default function ErrorPage() {
           <Typography level="title-lg" textColor="inherit">
             <WarningIcon sx={{ verticalAlign: "bottom" }} /> Something went wrong.<br/>
           </Typography>
-          <Typography textColor="primary.300" sx={{ mt: 1 }}><Link to={"/"} component={RouterLink} textColor="inherit">Create a new poll</Link></Typography>
+          <Typography textColor="primary.300" sx={{ mt: 1 }}><Link to={"/"} component={RouterLink} textColor="inherit">Create a Poll</Link></Typography>
         </CardContent>
       </Card>
     </div>
