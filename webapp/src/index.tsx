@@ -1,17 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
+import Header from "./components/header";
 import ErrorPage from "./error-page";
 import { loader as pollLoader } from "./loaders/poll";
 import Poll from "./routes/poll";
 import PollResults from "./routes/poll-results";
 import Root from "./routes/root";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
@@ -22,11 +23,13 @@ const router = createBrowserRouter([
   {
     path: "/poll/:pollId",
     element: <Poll />,
+    errorElement: <ErrorPage />,
     loader: pollLoader,
   },
   {
     path: "/poll/:pollId/results",
     element: <PollResults />,
+    errorElement: <ErrorPage />,
     loader: pollLoader,
   },
 ]);
@@ -34,8 +37,10 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
+    <Header></Header>
     <RouterProvider router={router} />
   </React.StrictMode>
 );

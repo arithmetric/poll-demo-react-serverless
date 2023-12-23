@@ -1,10 +1,11 @@
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 import { useMediaQuery } from "@mui/material";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import FormControl from "@mui/joy/FormControl";
+import Link from "@mui/joy/Link";
 import Radio from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import Sheet from "@mui/joy/Sheet";
@@ -26,6 +27,7 @@ const PollComponent = (props: PollComponentProps) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [isVotingDisabled, setVotingDisabled] = useState(true);
   const [isVotingSubmitting, setVotingSubmitting] = useState(false);
+  const poll = props.poll;
 
   const pickOption = (ev: ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(ev && ev.target ? ev.target.value : "");
@@ -33,34 +35,35 @@ const PollComponent = (props: PollComponentProps) => {
   };
 
   const submitVote = () => {
-    if (!props?.poll || !props?.poll.Id || !selectedOption) {
+    if (!poll || !poll.Id || !selectedOption) {
       return;
     }
     setVotingSubmitting(true);
-    PollService.Vote(props.poll?.Id, selectedOption)
+    PollService.Vote(poll.Id, selectedOption)
       .then(() => {
         window.location.pathname = `/poll/${props.poll?.Id}/results`;
       });
   };
 
-  const isSmallScreen = useMediaQuery('(max-width:600px)');
-  const poll = props.poll;
+  const stackOptions = useMediaQuery("(max-width:600px)") || (poll && poll.Options ? poll.Options.length > 4 : false);
   const getOptionVotes = (id: string) => (poll && poll.Votes && poll.Votes[id] ? poll.Votes[id] : 0);
   return (
     <div className="poll">
       {!poll && (
-        <div>Loading...</div>
+        <Typography level="title-md" sx={{ my: 1 }}>
+          Loading...
+        </Typography>
       )}
       {poll && (
         <>
-          <h1>{poll?.Question}</h1>
-          <div>{poll?.Description}</div>
+          <Typography level="h1" sx={{ my: 1 }}>{poll?.Question}</Typography>
+          <Typography sx={{ mb: 2 }}>{poll?.Description}</Typography>
           <FormControl>
             <RadioGroup
               overlay
               name="member"
               defaultValue="person1"
-              orientation={isSmallScreen ? 'vertical' : 'horizontal'}
+              orientation={stackOptions ? "vertical" : "horizontal"}
               sx={{ gap: 2 }}
             >
               {poll?.Options?.map((option: PollOption) => (
@@ -75,47 +78,51 @@ const PollComponent = (props: PollComponentProps) => {
                     alignItems: "center",
                     boxShadow: "sm",
                     borderRadius: "md",
-                    width: "100%",
                   }}
                 >
                   {props.showResults && option.Id && (
-                    <h4>{getOptionVotes(option.Id)} votes</h4>
-                  )}
-                  {!props.showResults && (
-                    <Radio
-                      value={option.Id}
-                      onChange={pickOption}
-                      variant="soft"
-                      sx={{
-                        mb: 2,
-                      }}
-                    />
+                    <Typography level="title-md" sx={{ mb: 2 }}>
+                      {getOptionVotes(option.Id)} votes
+                    </Typography>
                   )}
                   {option.ImageUrl && (
-                    <Box sx={{ m: "auto" }}>
+                    <Box sx={{ m: "auto", maxWidth: "80%" }}>
                       <img
                         src={option.ImageUrl}
                         alt={option.Text}
                         width="100%"
+                        style={{ maxHeight: "240px" }}
                       />
                     </Box>
                   )}
-                  <Typography level="body-md" sx={{ mt: 1 }}>
+                  <Typography level="title-md" sx={{ mt: 1 }}>
                     {option.Text}
                   </Typography>
+                  {!props.showResults && (
+                    <Radio
+                      value={option.Id}
+                      onChange={pickOption}
+                      variant="outlined"
+                      sx={{
+                        mt: 2,
+                      }}
+                    />
+                  )}
                 </Sheet>
               ))}
             </RadioGroup>
           </FormControl>
           {!props.isReadOnly && (
-            <FormControl>
+            <FormControl sx={{ my: 2 }}>
               <Button onClick={submitVote} disabled={isVotingDisabled} loading={isVotingSubmitting}>
                 Submit Vote
               </Button>
             </FormControl>
           )}
           {props.showResultsLink && (
-            <Link to={`/poll/${poll?.Id}/results`}>See the results</Link>
+            <Typography textColor="primary.300" sx={{ my: 2 }}>
+              <Link to={`/poll/${poll?.Id}/results`} component={RouterLink}>See the Results</Link>
+            </Typography>
           )}
         </>
       )}

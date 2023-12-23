@@ -1,11 +1,12 @@
 import Button from "@mui/joy/Button";
 import FormControl from "@mui/joy/FormControl";
+import Typography from "@mui/joy/Typography";
 import { useState } from "react";
 
-import { PollData } from "../../../types";
 import PollComponent from "../components/poll";
 import PollEditor from "../components/poll-editor";
 import { PollService } from "../services/poll";
+import { PollData } from "../../../types";
 
 export default function Root() {
   const [poll, setPoll] = useState<Partial<PollData>>();
@@ -28,18 +29,18 @@ export default function Root() {
     <>
       {!isPreview && (
         <>
-          <h1>Would you like to create a poll?</h1>
+          <Typography level="h1" sx={{ mb: 2 }}>Create a Poll</Typography>
           <PollEditor poll={poll} onPreviewClick={onPreviewClick} />
         </>
       )}
       {isPreview && poll && (
         <>
-          <h4>Previewing your poll...</h4>
+          <Typography level="h2" sx={{ mb: 2 }}>Previewing Your Poll</Typography>
           <PollComponent poll={poll} isReadOnly={true} />
-          <FormControl>
-            <Button onClick={() => setPreview(false)}>Edit</Button>
+          <FormControl sx={{ my: 1 }}>
+            <Button variant="soft" onClick={() => setPreview(false)}>Edit</Button>
           </FormControl>
-          <FormControl>
+          <FormControl sx={{ my: 1 }}>
             <Button onClick={onSaveClick}>Save</Button>
           </FormControl>
         </>

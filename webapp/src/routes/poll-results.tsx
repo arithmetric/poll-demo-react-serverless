@@ -1,9 +1,15 @@
-import Button from "@mui/joy/Button";
-import Typography from "@mui/joy/Typography";
+import dayjs from "dayjs";
+import calendar from "dayjs/plugin/calendar";
+import Box from "@mui/joy/Box";
+import Chip from "@mui/joy/Chip";
 import { useLoaderData, useRevalidator } from "react-router-dom";
+
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 import { LoaderData } from "../loaders/poll";
 import Poll from "../components/poll";
+
+dayjs.extend(calendar);
 
 export default function PollResultsPage() {
   const { poll, pollFetched } = useLoaderData() as LoaderData;
@@ -15,24 +21,28 @@ export default function PollResultsPage() {
 
   return (
     <>
-      <main>
-        {poll && (
-          <>
-            <Poll poll={poll} showResults={true} isReadOnly={true} />
-            {poll?.DateLastVote && (
-              <Typography level="body-sm" sx={{ mt: 1 }}>
-                Last Vote Cast: {(new Date(poll.DateLastVote)).toLocaleString()}
-              </Typography>
-            )}
-            {pollFetched && (
-              <Typography level="body-sm" sx={{ mt: 1 }}>
-                Results As Of: {(new Date(pollFetched)).toLocaleString()}
-                <Button onClick={refreshVotes}>Refresh</Button>
-              </Typography>
-            )}
-          </>
-        )}
-      </main>
+      {poll && (
+        <>
+          <Poll poll={poll} showResults={true} isReadOnly={true} />
+          {poll?.DateLastVote && (
+            <Box sx={{ mt: 1 }}>
+              <Chip size="md" variant="soft">Last Vote Cast: {dayjs(poll.DateLastVote).calendar()}</Chip>
+            </Box>
+          )}
+          {pollFetched && (
+            <Box sx={{ mt: 1 }}>
+              <Chip
+                variant="soft"
+                size="md"
+                endDecorator={<RefreshIcon fontSize="medium" />}
+                onClick={refreshVotes}
+              >
+                Last Fetched: {dayjs(pollFetched).calendar()}
+              </Chip>
+            </Box>
+          )}
+        </>
+      )}
     </>
   );
 }

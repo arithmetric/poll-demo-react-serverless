@@ -7,8 +7,6 @@ export default function PollPage() {
   const { poll } = useLoaderData() as LoaderData;
 
   return (
-    <>
-      <Poll poll={poll} showResultsLink={true} />
-    </>
+    <Poll poll={poll} showResultsLink={true} />
   );
 }

@@ -2,16 +2,15 @@ import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
-import Divider from "@mui/joy/Divider";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
-import IconButton from "@mui/joy/IconButton";
 import Input from "@mui/joy/Input";
 import Sheet from "@mui/joy/Sheet";
 import Textarea from "@mui/joy/Textarea";
 import Typography from "@mui/joy/Typography";
 import { useState } from "react";
 
+import AddIcon from '@mui/icons-material/Add';
 import Delete from "@mui/icons-material/Delete";
 
 import { PollData, PollOption } from "../../../types";
@@ -60,11 +59,11 @@ const PollEditorComponent = (props: PollEditorComponentProps) => {
   return (
     <div className="poll-editor">
       <Sheet>
-        <FormControl>
+        <FormControl sx={{ my: 1 }}>
           <FormLabel>Question *</FormLabel>
           <Input value={question} onChange={(e) => setQuestion(e.target.value)} />
         </FormControl>
-        <FormControl>
+        <FormControl sx={{ mb: 2 }}>
           <FormLabel>Description</FormLabel>
           <Textarea minRows={2} value={description} onChange={(e) => setDescription(e.target.value)} />
         </FormControl>
@@ -81,14 +80,13 @@ const PollEditorComponent = (props: PollEditorComponentProps) => {
             }}
           >
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-              <Typography level="title-lg" sx={{ mr: "auto" }}>
+              <Typography level="title-md" sx={{ mr: "auto" }}>
                 Option #{index + 1}
               </Typography>
-              <IconButton variant="soft" color="danger" sx={{ ml: "auto" }}>
-                <Delete onClick={() => removeOption(option.Id)} />
-              </IconButton>
+              <Button variant="soft" endDecorator={<Delete/>} onClick={() => removeOption(option.Id)} color="danger" size="sm" sx={{ ml: "auto" }}>
+                Remove
+              </Button>
             </Box>
-            <Divider inset="none" />
             <CardContent
               sx={{
                 display: "grid",
@@ -107,10 +105,10 @@ const PollEditorComponent = (props: PollEditorComponentProps) => {
             </CardContent>
           </Card>          
         ))}
-        <FormControl>
-          <Button onClick={addOption}>Add Option</Button>
+        <FormControl sx={{ my: 1 }}>
+          <Button onClick={addOption} variant="soft" startDecorator={<AddIcon />}>Add Option</Button>
         </FormControl>
-        <FormControl>
+        <FormControl sx={{ my: 1 }}>
           <Button onClick={preview}>Preview</Button>
         </FormControl>
       </Sheet>
