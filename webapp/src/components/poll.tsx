@@ -1,15 +1,16 @@
 import { ChangeEvent, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
-import { useMediaQuery } from "@mui/material";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import FormControl from "@mui/joy/FormControl";
+import FormLabel from "@mui/joy/FormLabel";
 import Link from "@mui/joy/Link";
 import Radio from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
+import { useMediaQuery } from "@mui/material";
 
 import { PollService } from "../services/poll";
 import { PollData, PollOption } from "../../../types";
@@ -27,6 +28,7 @@ const PollComponent = (props: PollComponentProps) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [isVotingDisabled, setVotingDisabled] = useState(true);
   const [isVotingSubmitting, setVotingSubmitting] = useState(false);
+  const navigate = useNavigate();
   const poll = props.poll;
 
   const pickOption = (ev: ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +43,11 @@ const PollComponent = (props: PollComponentProps) => {
     setVotingSubmitting(true);
     PollService.Vote(poll.Id, selectedOption)
       .then(() => {
-        window.location.pathname = `/poll/${props.poll?.Id}/results`;
+        navigate(`/poll/${props.poll?.Id}/results`);
+      })
+      .catch((err) => {
+        console.error("PollComponent:submitVote encountered error:", err);
+        setVotingSubmitting(false);
       });
   };
 
@@ -59,10 +65,13 @@ const PollComponent = (props: PollComponentProps) => {
           <Typography level="h1" sx={{ my: 1 }}>{poll?.Question}</Typography>
           <Typography sx={{ mb: 2 }}>{poll?.Description}</Typography>
           <FormControl>
+            {!props.showResults && (
+              <FormLabel>Choose an Option:</FormLabel>
+            )}
             <RadioGroup
               overlay
               name="member"
-              defaultValue="person1"
+              defaultValue=""
               orientation={stackOptions ? "vertical" : "horizontal"}
               sx={{ gap: 2 }}
             >
