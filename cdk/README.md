@@ -1,14 +1,16 @@
-# Welcome to your CDK TypeScript project
+# Poll Demo App Cloud Infrastructure Automation
 
-This is a blank project for CDK development with TypeScript.
+The cloud infrastructure for the Poll Demo App is deployed with AWS CDK.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Set Up
 
-## Useful commands
+1. Install the AWS CDK CLI.
+2. Copy `.env.example` to `.env` and update the configuration as desired.
+3. Set up the AWS CLI environment variables.
+4. Deploy the CDK bootstrap to the AWS account.
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+## Deploying
+
+1. Set up the AWS CLI environment variables.
+2. Check what changes will be deployed with `cdk diff`.
+3. Run the deploy process with `cdk deploy`.

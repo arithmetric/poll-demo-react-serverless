@@ -1,30 +1,34 @@
-# React + TypeScript + Vite
+# Web App for the Poll Demo App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Poll Demo App front end is a "single page" React web application built
+with TypeScript and Vite.
 
-Currently, two official plugins are available:
+When deployed to AWS, the static files are hosted in S3 and served with
+CloudFront (for caching/CDN purposes).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Local Development
 
-## Expanding the ESLint configuration
+This local environment quick start assumes you have the following installed:
+- [nvm](https://github.com/nvm-sh/nvm) (or Node.js 18)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+Run the web app with:
+```
+nvm use
+npm i
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Now you should be able to load the web app at: http://localhost:5000
+
+## Building and Deploying
+
+To deploy the backend services to an AWS environment, first build the web app
+static assets:
+```
+VITE_API_BASE_URL="https://api.poll-demo-example.com" npm run build
+```
+
+Note: The API base URL must be specified at build time.
+
+After building the assets, then deploy the AWS stack with the CDK package or
+manually copy the build output to S3 and clear the CloudFront caches.

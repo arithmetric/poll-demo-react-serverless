@@ -6,7 +6,9 @@
   "license": "MIT",
   "main": "handler.js",
   "scripts": {
-    "dev": "nodemon local-api.ts",
+    "dev": "echo 'Run \"npm run dev-api\" or \"npm run dev-worker\".'",
+    "dev-api": "AWS_REGION=us-east-1 AWS_ACCESS_KEY_ID=test AWS_SECRET_ACCESS_KEY=test nodemon local-api.ts",
+    "dev-worker": "AWS_REGION=us-east-1 AWS_ACCESS_KEY_ID=test AWS_SECRET_ACCESS_KEY=test nodemon local-worker.ts",
     "build": "tsc",
     "postbuild": "cp package.json dist/package.json && cd dist && npm install --omit=dev && rm ../build.zip && zip -r ../build.zip .",
     "lint": "eslint . --ext .ts",

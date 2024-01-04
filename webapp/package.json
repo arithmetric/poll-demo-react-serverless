@@ -1,7 +1,9 @@
 {
-  "name": "viteapp",
-  "private": true,
-  "version": "0.0.0",
+  "name": "poll-demo-react-serverless-webapp",
+  "version": "1.0.0",
+  "description": "React web app with TypeScript and Vite for the Poll Demo.",
+  "author": "Joe Turgeon <arithmetric@gmail.com>",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
