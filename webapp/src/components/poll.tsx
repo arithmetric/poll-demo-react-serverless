@@ -43,7 +43,7 @@ const PollComponent = (props: PollComponentProps) => {
     setVotingSubmitting(true);
     PollService.Vote(poll.Id, selectedOption)
       .then(() => {
-        navigate(`/poll/${props.poll?.Id}/results`);
+        navigate(`/poll/${props.poll?.Id}/results`, { state: { afterVoting: true} });
       })
       .catch((err) => {
         console.error("PollComponent:submitVote encountered error:", err);

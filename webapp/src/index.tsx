@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import Header from "./components/header";
+import PollSkeleton from "./components/poll-skeleton";
 import ErrorPage from "./error-page";
 import { loader as pollLoader } from "./loaders/poll";
 import Poll from "./routes/poll";
@@ -41,6 +42,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Header></Header>
-    <RouterProvider router={router} />
+    <RouterProvider
+      router={router}
+      fallbackElement={<PollSkeleton/>}
+    />
   </React.StrictMode>
 );

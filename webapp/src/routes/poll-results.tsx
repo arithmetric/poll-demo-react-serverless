@@ -1,7 +1,8 @@
 import dayjs from "dayjs";
 import calendar from "dayjs/plugin/calendar";
-import { Link as RouterLink, useLoaderData, useRevalidator } from "react-router-dom";
+import { Link as RouterLink, useLoaderData, useLocation, useRevalidator } from "react-router-dom";
 
+import Alert from "@mui/joy/Alert";
 import Box from "@mui/joy/Box";
 import Chip from "@mui/joy/Chip";
 import Link from "@mui/joy/Link";
@@ -16,6 +17,7 @@ dayjs.extend(calendar);
 
 export default function PollResultsPage() {
   const { poll, pollFetched } = useLoaderData() as LoaderData;
+  const location = useLocation();
   const revalidator = useRevalidator();
 
   const refreshVotes = () => {
@@ -24,6 +26,12 @@ export default function PollResultsPage() {
 
   return (
     <>
+      {location.state?.afterVoting && (
+        <Alert color="success" sx={{ display: "block" }}>
+          <p>Your vote is submitted. It may not yet be included in the counts below.</p>
+          <p>Press "Last Fetched" below to refresh the data.</p>
+        </Alert>
+      )}
       {poll && (
         <>
           <Poll poll={poll} showResults={true} isReadOnly={true} />
